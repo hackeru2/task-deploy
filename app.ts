@@ -7,7 +7,6 @@ const morgan = require('morgan')
 const path = require('path')
 
 const normalizePort: any = (port: any) => parseInt(port, 10)
-const PORT = normalizePort(process.env.port)
 const app: Application = express();
 const dev = app.get('env') !== 'production'
 let dbPath = "./database.js"

@@ -10,7 +10,6 @@ const compression = require('compression');
 const morgan = require('morgan');
 const path = require('path');
 const normalizePort = (port) => parseInt(port, 10);
-const PORT = normalizePort(process.env.port);
 const app = express_1.default();
 const dev = app.get('env') !== 'production';
 let dbPath = "./database.js";
