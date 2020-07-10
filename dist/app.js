@@ -140,7 +140,7 @@ app.get("/:index", (req, res, next) => {
         res.send(row);
     });
 });
-app.listen(PORT || 5000, () => console.log('ServerRunning'));
+app.listen(process.env.PORT || 5000, () => console.log('ServerRunning'));
 app.get("/api/users", (req, res, next) => {
     var sql = "select * from user";
     var params = [];

@@ -167,7 +167,7 @@ app.get("/:index", (req: Request, res: Response, next: NextFunction) => {
     });
 });
 
-app.listen(PORT || 5000, () => console.log('ServerRunning'))
+app.listen(process.env.PORT || 5000, () => console.log('ServerRunning'))
 
 
 app.get("/api/users", (req, res, next) => {
