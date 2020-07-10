@@ -9,18 +9,17 @@ var cors = require('cors');
 const compression = require('compression');
 const morgan = require('morgan');
 const path = require('path');
-console.log("am i here?");
 const normalizePort = (port) => parseInt(port, 10);
 const PORT = normalizePort(process.env.port);
 const app = express_1.default();
 const dev = app.get('env') !== 'production';
+let dbPath = "../database.js";
 if (!dev) {
-    console.log("am i here?");
+    dbPath = "./database.js";
     app.disable('x-powered-by');
     app.use(compression());
     app.use(morgan('common'));
     app.use(express_1.default.static(path.resolve(__dirname, 'build')));
-    console.log("am i here?");
     app.get("/", (req, res, next) => {
         res.sendfile(path.resolve(__dirname, 'build', 'index.html'));
     });
@@ -30,7 +29,7 @@ else
 app.use(cors());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use(express_1.default.json());
-var db = require("./database.js");
+var db = require(dbPath);
 // const router: Router = express.Router();
 app.get("/all", (req, res, next) => {
     // console.log('add(5,5)', add(5, 5))
@@ -131,16 +130,13 @@ app.delete("/:id/delete", (req, res, next) => {
     });
 });
 app.get("/:index", (req, res, next) => {
-    console.log("am i here?");
     var sql = "select * from task where id = ?";
     var params = [req.params.index];
-    console.log("am i here?");
     db.all(sql, params, (err, row) => {
         if (err) {
             res.status(400).json({ "error": err.message });
             return;
         }
-        console.log("am i here?");
         res.send(row);
     });
 });

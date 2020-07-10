@@ -5,20 +5,20 @@ var cors = require('cors')
 const compression = require('compression')
 const morgan = require('morgan')
 const path = require('path')
-console.log("am i here?")
+
 const normalizePort: any = (port: any) => parseInt(port, 10)
 const PORT = normalizePort(process.env.port)
 const app: Application = express();
 const dev = app.get('env') !== 'production'
-
+let dbPath = "../database.js"
 if (!dev) {
-    console.log("am i here?")
+    dbPath = "./database.js"
     app.disable('x-powered-by')
     app.use(compression())
     app.use(morgan('common'))
 
     app.use(express.static(path.resolve(__dirname, 'build')))
-    console.log("am i here?")
+
     app.get("/", (req: Request, res: Response, next: NextFunction) => {
 
         res.sendfile(path.resolve(__dirname, 'build', 'index.html'))
@@ -28,7 +28,7 @@ else app.use(morgan('dev'))
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-var db = require("./database.js")
+var db = require(dbPath)
 // const router: Router = express.Router();
 
 
@@ -153,16 +153,16 @@ app.delete("/:id/delete", (req: Request, res: Response, next: NextFunction) => {
 app.get("/:index", (req: Request, res: Response, next: NextFunction) => {
 
 
-    console.log("am i here?")
+
     var sql = "select * from task where id = ?"
     var params = [req.params.index]
-    console.log("am i here?")
+
     db.all(sql, params, (err: any, row: any) => {
         if (err) {
             res.status(400).json({ "error": err.message });
             return;
         }
-        console.log("am i here?")
+
         res.send(row)
     });
 });
