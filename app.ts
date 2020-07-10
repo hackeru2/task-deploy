@@ -10,9 +10,9 @@ const normalizePort: any = (port: any) => parseInt(port, 10)
 const PORT = normalizePort(process.env.port)
 const app: Application = express();
 const dev = app.get('env') !== 'production'
-let dbPath = "../database.js"
+let dbPath = "./database.js"
 if (!dev) {
-    dbPath = "./database.js"
+    dbPath = "../database.js"
     app.disable('x-powered-by')
     app.use(compression())
     app.use(morgan('common'))
