@@ -27,7 +27,7 @@ else
 app.use(cors());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use(express_1.default.json());
-var db = require("database.js");
+var db = require("./database.js");
 // const router: Router = express.Router();
 app.get("/all", (req, res, next) => {
     // console.log('add(5,5)', add(5, 5))
