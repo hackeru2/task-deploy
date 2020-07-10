@@ -27,7 +27,7 @@ else app.use(morgan('dev'))
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-var db = require("../database.js")
+var db = require("database.js")
 // const router: Router = express.Router();
 
 

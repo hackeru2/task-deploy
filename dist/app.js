@@ -27,7 +27,7 @@ else
 app.use(cors());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use(express_1.default.json());
-var db = require("../database.js");
+var db = require("database.js");
 // const router: Router = express.Router();
 app.get("/all", (req, res, next) => {
     // console.log('add(5,5)', add(5, 5))
@@ -128,9 +128,6 @@ app.delete("/:id/delete", (req, res, next) => {
     });
 });
 app.get("/:index", (req, res, next) => {
-    // let index = Number(req.params.index);
-    // console.log(req.params.index)
-    // res.send(vip_arr[index])
     var sql = "select * from task where id = ?";
     var params = [req.params.index];
     db.all(sql, params, (err, row) => {
@@ -138,10 +135,6 @@ app.get("/:index", (req, res, next) => {
             res.status(400).json({ "error": err.message });
             return;
         }
-        // res.json({
-        //     "message": "success",
-        //     "data": row
-        // })
         res.send(row);
     });
 });
